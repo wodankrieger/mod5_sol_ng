@@ -13,7 +13,6 @@
         $ctrl.submit = function () {
             MenuService.getMenuItem($ctrl.user.menu_item).then(function (data) {
                 if (data.status !== 500){
-                    console.log('true');
                     $ctrl.completed = true;
                     $ctrl.menu = data;
                     MenuService.saveUser($ctrl);

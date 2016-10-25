@@ -33,9 +33,7 @@ function MenuService($http, ApiPath) {
   service.getMenuItem = function (short_name) {
     if (short_name)
     return $http.get(ApiPath + '/menu_items/' + short_name + '.json').then(function (response) {
-        console.log(response.data);
-      console.log('success');
-        return response.data;
+       return response.data;
       }).catch(function (status) {
         return status;
     });
