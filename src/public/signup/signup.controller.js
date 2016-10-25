@@ -1,22 +1,26 @@
 (function () {
-"use strict";
+    "use strict";
 
 
-angular.module('public')
-    .controller('SignUpController', SignUpController);
+    angular.module('public')
+        .controller('SignUpController', SignUpController);
 
-SignUpController.$inject = ['MenuService', 'ApiPath'];
-function SignUpController(MenuService, ApiPath) {
-    var $ctrl = this;
+    SignUpController.$inject = ['MenuService', 'ApiPath'];
+    function SignUpController(MenuService, ApiPath) {
+        var $ctrl = this;
 
-    $ctrl.basePath = ApiPath;
+        $ctrl.basePath = ApiPath;
+        $ctrl.submit = function () {
+            MenuService.getMenuItem($ctrl.user.menu_item).then(function (data) {
+                if (data.status !== 500){
+                    console.log('true');
+                    $ctrl.completed = true;
+                    $ctrl.menu = data;
+                    MenuService.saveUser($ctrl);
+                } else
+                    $ctrl.completed = false;
+            });
 
-    $ctrl.submit = function () {
-        MenuService.getMenuItem($ctrl.user.menu_item).then(function(data){
-            $ctrl.completed = true;
-            $ctrl.menu = data;
-        });
-        MenuService.saveUser($ctrl);
-    };
-}
+        };
+    }
 })();

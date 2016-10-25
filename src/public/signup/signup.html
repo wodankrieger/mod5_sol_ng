@@ -33,6 +33,9 @@
                 <input type="text" name="menuItem" placeholder="Favorite menu"
                 ng-model="$ctrl.user.menu_item"
                 required>
+                <span ng-if="!$ctrl.completed && $ctrlForm.menuItem.$touched">
+                    <br> No such number exists
+                </span>
                 <br>
 
                 <button
